@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Auric::Vault::Door::VERSION
   spec.authors       = ["Carl Anderson"]
   spec.email         = ["carl@planetargon.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Provides access to the Auric Vault API.}
+  spec.description   = %q{Provides access to API at https://www.auricsystems.com/products/paymentvault-tokenization/ for storing data using a token.}
   spec.homepage      = ""
   spec.license       = "MIT"
 

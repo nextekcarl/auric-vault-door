@@ -10,18 +10,22 @@ module Auric
       SANDBOXURLS = ['https://vault01-sb.auricsystems.com/vault/v2/', 'https://vault02-sb.auricsystems.com/vault/v2/']
       PRODUCTIONURLS= ['https://vault01-sb.auricsystems.com/vault/v2/', 'https://vault02-sb.auricsystems.com/vault/v2/']
 
-      def initialize(secret, mtid, config_id, segment, production = false)
-        @secret = secret
-        @mtid = mtid
-        @config_id = config_id
-        @production = production
-        @segment = segment
+      def initialize(args)
+        required_args = [:secret, :mtid, :config_id]
+        required_args.each do |arg|
+          raise ArgumentError, "Required argument: (#{arg}) not provided" unless args.include?(arg)
+        end
+        @secret = args[:secret]
+        @mtid = args[:mtid]
+        @config_id = args[:config_id]
+        @production = args[:production] || false
+        @segment = args[:segment]
         @success = false
         @error = nil
         if @production
-          @url = PRODUCTIONURLS.first
+          @url = PRODUCTIONURLS
         else
-          @url = SANDBOXURLS.first
+          @url = SANDBOXURLS
         end
       end
 
@@ -83,13 +87,23 @@ module Auric
 
       def call_auric(method, data)
         signature = figure_hexdigest_for_auth(data)
+        begin
         HTTParty.post(
-          @url,
+          @url[0],
           {
             :body => data.to_json,
             headers: { 'X-VAULT-HMAC' => signature }
           }
         )
+      rescue
+        HTTParty.post(
+          @url[1],
+          {
+            :body => data.to_json,
+            headers: { 'X-VAULT-HMAC' => signature }
+          }
+        )
+      end
       end
 
       def post_data(method, data)

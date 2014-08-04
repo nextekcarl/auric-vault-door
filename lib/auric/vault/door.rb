@@ -95,15 +95,15 @@ module Auric
             headers: { 'X-VAULT-HMAC' => signature }
           }
         )
-      rescue
-        HTTParty.post(
-          @url[1],
-          {
-            :body => data.to_json,
-            headers: { 'X-VAULT-HMAC' => signature }
-          }
-        )
-      end
+        rescue
+          HTTParty.post(
+            @url[1],
+            {
+              :body => data.to_json,
+              headers: { 'X-VAULT-HMAC' => signature }
+            }
+          )
+        end
       end
 
       def post_data(method, data)

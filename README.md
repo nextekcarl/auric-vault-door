@@ -18,7 +18,10 @@ Or install it yourself as:
 
 ## Usage
 
-@door = Auric::Vault::Door.new('shared_secret_goes_here', 'merchant_id', 'config_id', 'segment', @production_boolean?)
+It now expects a hash or arguments when being created:
+args = {secret: 'shared_secret_goes_here', mtid: 'merchant_id', config_id: 'config_id', segment: '123'} #optional: production: true, defaults to false
+
+@door = Auric::Vault::Door.new(args)
 
 @door.encrypt('string_to_encrypt')
 => 'dpFAl7BY260IWzFxxxx'

@@ -1,6 +1,6 @@
 module Auric
   module Vault
-    module Door
+    class Door
       VERSION = "0.0.1"
     end
   end

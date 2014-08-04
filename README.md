@@ -18,7 +18,22 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+@door = Auric::Vault::Door.new('shared_secret_goes_here', 'merchant_id', 'config_id', 'segment', @production_boolean?)
+
+@door.encrypt('string_to_encrypt')
+=> 'dpFAl7BY260IWzFxxxx'
+
+@door.decrypt('dpFAl7BY260IWzFxxxx')
+=> 'string_to_encrypt'
+
+If either method fails, checking error should return a string about what went wrong:
+
+@door.error
+=> "VLT-112: This method is missing the following fields. Method: decrypt [token]"
+
+TODO: Only encrypt and decrypt methods are currently implemented.
+Better error error handling
+Tests.
 
 ## Contributing
 

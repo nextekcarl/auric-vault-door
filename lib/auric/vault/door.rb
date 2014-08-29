@@ -39,7 +39,7 @@ module Auric
           return json['result']['token']
         else
           @error = json['error']
-          return false
+          raise EncryptionError, @error
         end
       end
 
@@ -49,7 +49,7 @@ module Auric
           return json['result']['plaintextValue']
         else
           @error = json['error']
-          return false
+          raise DecryptionError, @error
         end
       end
 

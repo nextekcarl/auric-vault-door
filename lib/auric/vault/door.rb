@@ -5,6 +5,10 @@ require 'HTTParty'
 module Auric
   module Vault
     class Door
+        class EncryptionError < StandardError; end
+        class DecryptionError < StandardError; end
+
+
       attr_accessor :secret, :mtid, :config_id, :production, :segment
       attr_reader :error, :success
       SANDBOXURLS = ['https://vault01-sb.auricsystems.com/vault/v2/', 'https://vault02-sb.auricsystems.com/vault/v2/']
@@ -35,7 +39,7 @@ module Auric
           return json['result']['token']
         else
           @error = json['error']
-          return false
+          raise EncryptionError, @error
         end
       end
 
@@ -45,7 +49,7 @@ module Auric
           return json['result']['plaintextValue']
         else
           @error = json['error']
-          return false
+          raise DecryptionError, @error
         end
       end
 

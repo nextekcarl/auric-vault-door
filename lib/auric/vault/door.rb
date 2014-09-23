@@ -1,6 +1,6 @@
 require "auric/vault/door/version"
 require 'openssl'
-require 'HTTParty'
+require 'httparty'
 
 module Auric
   module Vault

@@ -12,7 +12,7 @@ module Auric
       attr_accessor :secret, :mtid, :config_id, :production, :segment
       attr_reader :error, :success
       SANDBOXURLS = ['https://vault01-sb.auricsystems.com/vault/v2/', 'https://vault02-sb.auricsystems.com/vault/v2/']
-      PRODUCTIONURLS= ['https://vault01-sb.auricsystems.com/vault/v2/', 'https://vault02-sb.auricsystems.com/vault/v2/']
+      PRODUCTIONURLS= ['https://vault01.auricsystems.com/vault/v2/', 'https://vault02.auricsystems.com/vault/v2/']
 
       def initialize(args)
         required_args = [:secret, :mtid, :config_id]
